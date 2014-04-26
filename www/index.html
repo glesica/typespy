@@ -14,13 +14,16 @@
                 logger.log.forEach(function(x) { s = s + x.character; });
                 console.log(s);
 
-                $.post('localhost:7474/v1/typecreep/insert',
-                    logger.asJSON(),
-                    function() {
-                        alert('We got yo shit!');
-                        logger.inputElement.val('');
-                    }
-                );
+                $.ajax({
+                        url: 'http://localhost:7474/v1/typecreep/insert',
+                        data: logger.asJSON(),
+                        success: function() {
+                            alert('We got yo shit!');
+                            logger.inputElement.val('');
+                        },
+                        type: 'POST',
+                        contentType: 'APPLICATION/JSON'
+                        });
             });
         });
         </script>
