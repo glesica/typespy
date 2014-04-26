@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/typespy.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="js/typespy.js"></script>
+        <script>
+        $(function() {
+            logger = new TYPESPY.Logger('#input-text', '#user-email');
+
+            $('#button-submit').click(function() {
+                console.log(logger.asJSON());
+                var s = '';
+                logger.log.forEach(function(x) { s = s + x.character; });
+                console.log(s);
+
+                $.post('localhost:7474/v1/typecreep/insert',
+                    logger.asJSON(),
+                    function() {
+                        alert('We got yo shit!');
+                        logger.inputElement.val('');
+                    }
+                );
+            });
+        });
+        </script>
+        <title>TypeSpy</title>
+    </head>
+    <body>
+        <h1>TypeSpy</h1>
+
+        <h2>Directions</h2>
+        <p>Enter your email address in the first box, then type some text in
+        the second box. Once you are done, click the <strong>Submit</strong>
+        button.</p>
+
+        <h2>Email address</h2>
+        <input id="user-email" type="text" />
+
+        <h2>Type some stuff in this box</h2>
+        <textarea id="input-text"></textarea>
+        <div id="button-bar">
+            <button id="button-submit">Submit</button>
+        </div>
+    </body>
+</html>
