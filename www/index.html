@@ -26,6 +26,25 @@
                         contentType: 'APPLICATION/JSON'
                         });
             });
+
+            $('#button-classify').click(function() {
+                console.log(logger.asJSON());
+                var s = '';
+                logger.log.forEach(function(x) {s = s + x.character; });
+                console.log(s);
+
+                $.ajax({
+                    url: 'http://localhost:7474/v1/typecreep/classify',
+                    data: logger.asJSON(),
+                    success: function(data) {
+                        console.log(data);
+                        logger.inputElement.val('');
+                        },
+                    type: 'POST',
+                    contentType: "APPLICATION/JSON"
+                });
+            });
+
         });
         </script>
         <title>TypeSpy</title>
@@ -45,6 +64,7 @@
         <textarea id="input-text"></textarea>
         <div id="button-bar">
             <button id="button-submit">Submit</button>
+            <button id="button-classify">Classify</button>
         </div>
     </body>
 </html>
