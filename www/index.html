@@ -15,7 +15,7 @@
                 console.log(s);
 
                 $.ajax({
-                        url: 'http://localhost:7474/v1/typecreep/insert',
+                        url: '/insert',
                         data: logger.asJSON(),
                         success: function(data) {
                             alert('We got yo shit!');
@@ -34,7 +34,7 @@
                 console.log(s);
 
                 $.ajax({
-                    url: 'http://localhost:7474/v1/typecreep/classify',
+                    url: '/classify',
                     data: logger.asJSON(),
                     success: function(data) {
                         console.log(data);
