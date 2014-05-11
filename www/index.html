@@ -18,13 +18,21 @@
                         url: '/insert',
                         data: logger.asJSON(),
                         success: function(data) {
-                            alert('We have received your input!');
+                            if (data.status === 'success') {
+                                alert('We have received your input!');
+                            } else {
+                                alert('Something went wrong, maybe you try again?');
+                            }
                             console.log(data);
                         },
                         type: 'POST',
                         contentType: 'APPLICATION/JSON'
                         });
 
+                logger.clearLog();
+            });
+
+            $('#button-clear').click(function() {
                 logger.clearLog();
             });
 
