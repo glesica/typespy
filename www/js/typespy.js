@@ -258,6 +258,7 @@ TYPESPY.Logger.prototype.clearInput = function() {
 
 TYPESPY.Logger.prototype.clearLog = function() {
     this.log = [];
+    this.tempLog = {};
     this.clearInput();
 };
 
