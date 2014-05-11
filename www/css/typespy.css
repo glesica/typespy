@@ -46,6 +46,10 @@ button:hover {
     float: right;
 }
 
+#button-clear {
+    float: right;
+}
+
 #button-random {
     float: right;
 }
