@@ -42,6 +42,10 @@ button:hover {
     background-color: #006699;
 }
 
+#button-classify {
+    float: right;
+}
+
 #button-random {
     float: right;
 }
