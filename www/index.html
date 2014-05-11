@@ -14,6 +14,14 @@
                 logger.log.forEach(function(x) { s = s + x.character; });
                 console.log(s);
 
+                var sample = $('.sample').text();
+
+                if (s !== sample) {
+                    alert('Please type the sample text without any errors.');
+                    logger.clearLog();
+                    return;
+                }
+
                 $.ajax({
                         url: '/insert',
                         data: logger.asJSON(),
