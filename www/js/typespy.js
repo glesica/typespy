@@ -8,9 +8,18 @@
 
 TYPESPY = {}
 
-TYPESPY.toChar = function(evt) {
+TYPESPY.toChar = function(evt, shift) {
+    shift = shift || false;
+
+    // If shift is set to true the function is run under the assumption that
+    // the shift key was held down, regardless of the actual state of the shift
+    // key.
+    if (evt.shiftKey || shift) {
+        var shiftKey = true;
+    }
+
     if (evt.keyCode >= 65 && evt.keyCode <= 90) {
-        if (evt.shiftKey) {
+        if (shiftKey) {
             return String.fromCharCode(evt.keyCode).toUpperCase();
         } else {
             return String.fromCharCode(evt.keyCode).toLowerCase();
@@ -28,70 +37,70 @@ TYPESPY.toChar = function(evt) {
             repr = ' ';
             break;
         case 48:
-            if (evt.shiftKey) {
+            if (shiftKey) {
                 repr = ')';
             } else {
                 repr = '0';
             }
             break;
         case 49:
-            if (evt.shiftKey) {
+            if (shiftKey) {
                 repr = '!';
             } else {
                 repr = '1';
             }
             break;
         case 50:
-            if (evt.shiftKey) {
+            if (shiftKey) {
                 repr = '@';
             } else {
                 repr = '2';
             }
             break;
         case 51:
-            if (evt.shiftKey) {
+            if (shiftKey) {
                 repr = '#';
             } else {
                 repr = '3';
             }
             break;
         case 52:
-            if (evt.shiftKey) {
+            if (shiftKey) {
                 repr = '$';
             } else {
                 repr = '4';
             }
             break;
         case 53:
-            if (evt.shiftKey) {
+            if (shiftKey) {
                 repr = '%';
             } else {
                 repr = '5';
             }
             break;
         case 54:
-            if (evt.shiftKey) {
+            if (shiftKey) {
                 repr = '^';
             } else {
                 repr = '6';
             }
             break;
         case 55:
-            if (evt.shiftKey) {
+            if (shiftKey) {
                 repr = '&';
             } else {
                 repr = '7';
             }
             break;
         case 56:
-            if (evt.shiftKey) {
+            if (shiftKey) {
                 repr = '*';
             } else {
                 repr = '8';
             }
             break;
         case 57:
-            if (evt.shiftKey) {
+            if (shiftKey) {
                 repr = '(';
             } else {
                 repr = '9';
@@ -125,77 +134,77 @@ TYPESPY.toChar = function(evt) {
             repr = '/';
             break;
         case 186:
-            if (evt.shiftKey) {
+            if (shiftKey) {
                 repr = ':';
             } else {
                 repr = ';';
             }
             break;
         case 187:
-            if (evt.shiftKey) {
+            if (shiftKey) {
                 repr = '+';
             } else {
                 repr = '=';
             }
             break;
         case 188:
-            if (evt.shiftKey) {
+            if (shiftKey) {
                 repr = '<';
             } else {
                 repr = ',';
             }
             break;
         case 189:
-            if (evt.shiftKey) {
+            if (shiftKey) {
                 repr = '_';
             } else {
                 repr = '-';
             }
             break;
         case 190:
-            if (evt.shiftKey) {
+            if (shiftKey) {
                 repr = '>';
             } else {
                 repr = '.';
             }
             break;
         case 191:
-            if (evt.shiftKey) {
+            if (shiftKey) {
                 repr = '?';
             } else {
                 repr = '/';
             }
             break;
         case 192:
-            if (evt.shiftKey) {
+            if (shiftKey) {
                 repr = '~';
             } else {
                 repr = '`';
             }
             break;
         case 219:
-            if (evt.shiftKey) {
+            if (shiftKey) {
                 repr = '{';
             } else {
                 repr = '[';
             }
             break;
         case 220:
-            if (evt.shiftKey) {
+            if (shiftKey) {
                 repr = '|';
             } else {
                 repr = '\\';
             }
             break;
         case 221:
-            if (evt.shiftKey) {
+            if (shiftKey) {
                 repr = '}';
             } else {
                 repr = ']';
             }
             break;
         case 222:
-            if (evt.shiftKey) {
+            if (shiftKey) {
                 repr = '"';
             } else {
                 repr = "'";
@@ -240,7 +249,7 @@ TYPESPY.Logger.prototype.capture = function(evt) {
         // the keyup and the letter gets skipped entirely. As a workaround, we
         // can convert to lowercase and check here.
         if (! this.tempLog.hasOwnProperty(seenChar)) {
-            seenChar = seenChar.toUpperCase();
+            seenChar = TYPESPY.toChar(evt, true);
         }
         
         // Only record an event if there was a preceding keypress event, which
