@@ -235,6 +235,14 @@ TYPESPY.Logger.prototype.capture = function(evt) {
         // Cache the keypress until we get the keyup
         this.tempLog[seenChar] = evt;
     } else {
+        // Hack: if the user enters a capital letter and lets up the shift key
+        // before the letter key, we end up capturing a lower case letter on
+        // the keyup and the letter gets skipped entirely. As a workaround, we
+        // can convert to lowercase and check here.
+        if (! this.tempLog.hasOwnProperty(seenChar)) {
+            seenChar = seenChar.toUpperCase();
+        }
+        
         // Only record an event if there was a preceding keypress event, which
         // lets us exclude special keys (since they don't trigger keypress
         // events.
