@@ -55,8 +55,7 @@
                     data: logger.asJSON(),
                     success: function(data) {
                         console.log(data);
-                        logger.inputElement.val('');
-                        },
+                    },
                     type: 'POST',
                     contentType: "APPLICATION/JSON"
                 });
@@ -89,7 +88,7 @@
         <div id="button-bar">
             <button id="button-submit">Submit</button>
             <button id="button-clear">Reset</button>
-            <!--<button id="button-classify">Classify</button>-->
+            <button id="button-classify">Classify</button>
         </div>
 
         <h2 style="clear: both; margin-top: 4em;">What is this?</h2>
